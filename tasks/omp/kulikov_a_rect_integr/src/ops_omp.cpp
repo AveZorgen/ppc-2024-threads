@@ -29,7 +29,7 @@ bool KulikovTaskOMP::run() {
   try {
     h_x = (x_lim_u - x_lim_l) / n, h_y = (y_lim_u - y_lim_l) / n;
     double res_ = .0;
-    #pragma omp parallel for reduction(+:res_)
+#pragma omp parallel for reduction(+ : res_)
     for (int64_t i = 0; i < n; i++) {
       for (int64_t j = 0; j < n; j++) {
         res_ += f(x_lim_l + h_x * (i + 1 / 2), y_lim_l + h_y * (j + 1 / 2));

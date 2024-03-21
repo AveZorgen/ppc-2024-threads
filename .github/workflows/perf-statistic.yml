@@ -1,10 +1,10 @@
 name: Collect performance statistic
 
-# on: [push, pull_request]
+on: [workflow_dispatch]
 
-on:
-  schedule:
-    - cron: '0 12 */2 * *'
+# on:
+#   schedule:
+#     - cron: '0 12 */2 * *'
 
 jobs:
   ubuntu-gcc-build:
@@ -47,9 +47,30 @@ jobs:
     - name: Check number tests
       run: |
         source scripts/run_num_test.sh
-    - name: Run perf tests
+    - name: mkdir
       run: |
-        source scripts/generate_perf_results.sh
+        mkdir build/perf_stat_dir
+    - name: omp_perf_tests
+      run: |
+        ./build/bin/omp_perf_tests
+    - name: tbb_perf_tests
+      run: |
+        ./build/bin/tbb_perf_tests
+    - name: seq_perf_tests
+      run: |
+        ./build/bin/seq_perf_tests
+    - name: stl_perf_tests
+      run: |
+        ./build/bin/stl_perf_tests
+    - name: run_perf_collector
+      run: |
+        source scripts/run_perf_collector.sh
+    - name: run_perf_collector&>
+      run: |
+        source scripts/run_perf_collector.sh &> build/perf_stat_dir/perf_log.txt
+    - name: create_perf_table
+      run: |
+        python3 scripts/create_perf_table.py --input build/perf_stat_dir/perf_log.txt --output build/perf_stat_dir
     - name: Archive results
       uses: montudor/action-zip@v1
       with:

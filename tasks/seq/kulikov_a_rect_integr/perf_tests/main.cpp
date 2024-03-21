@@ -1,13 +1,12 @@
 // Copyright 2023 Kulikov Artem
 #include <gtest/gtest.h>
-#include <omp.h>
 
 #include <vector>
 
 #include "core/perf/include/perf.hpp"
-#include "omp/kulikov_a_rect_integr/include/ops_omp.hpp"
+#include "seq/kulikov_a_rect_integr/include/ops_seq.hpp"
 
-TEST(kulikov_a_rect_integr_omp, test_pipeline_run) {
+TEST(kulikov_a_rect_integr_seq, test_pipeline_run) {
   // Create data
   std::vector<double> in{-15.0, 15.0, -20.0, 10.0, 4e3};
   std::vector<double> out(2);
@@ -20,24 +19,29 @@ TEST(kulikov_a_rect_integr_omp, test_pipeline_run) {
   taskDataSeq->outputs_count.emplace_back(out.size());
 
   // Create Task
-  auto kulikovTaskOMP = std::make_shared<KulikovTaskOMP>(taskDataSeq);
+  auto kulikovTaskSequential = std::make_shared<KulikovTaskSequential>(taskDataSeq);
 
   // Create Perf attributes
   auto perfAttr = std::make_shared<ppc::core::PerfAttr>();
   perfAttr->num_running = 10;
-  perfAttr->current_timer = [&] { return omp_get_wtime(); };
+  const auto t0 = std::chrono::high_resolution_clock::now();
+  perfAttr->current_timer = [&] {
+    auto current_time_point = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(current_time_point - t0).count();
+    return static_cast<double>(duration) * 1e-9;
+  };
 
   // Create and init perf results
   auto perfResults = std::make_shared<ppc::core::PerfResults>();
 
   // Create Perf analyzer
-  auto perfAnalyzer = std::make_shared<ppc::core::Perf>(kulikovTaskOMP);
+  auto perfAnalyzer = std::make_shared<ppc::core::Perf>(kulikovTaskSequential);
   perfAnalyzer->pipeline_run(perfAttr, perfResults);
   ppc::core::Perf::print_perf_statistic(perfResults);
   ASSERT_NEAR((double)63000, out[0], out[1]);
 }
 
-TEST(kulikov_a_rect_integr_omp, test_task_run) {
+TEST(kulikov_a_rect_integr_seq, test_task_run) {
   // Create data
   std::vector<double> in{-15.0, 15.0, -20.0, 10.0, 4e3};
   std::vector<double> out(2);
@@ -50,18 +54,23 @@ TEST(kulikov_a_rect_integr_omp, test_task_run) {
   taskDataSeq->outputs_count.emplace_back(out.size());
 
   // Create Task
-  auto kulikovTaskOMP = std::make_shared<KulikovTaskOMP>(taskDataSeq);
+  auto kulikovTaskSequential = std::make_shared<KulikovTaskSequential>(taskDataSeq);
 
   // Create Perf attributes
   auto perfAttr = std::make_shared<ppc::core::PerfAttr>();
   perfAttr->num_running = 10;
-  perfAttr->current_timer = [&] { return omp_get_wtime(); };
+  const auto t0 = std::chrono::high_resolution_clock::now();
+  perfAttr->current_timer = [&] {
+    auto current_time_point = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(current_time_point - t0).count();
+    return static_cast<double>(duration) * 1e-9;
+  };
 
   // Create and init perf results
   auto perfResults = std::make_shared<ppc::core::PerfResults>();
 
   // Create Perf analyzer
-  auto perfAnalyzer = std::make_shared<ppc::core::Perf>(kulikovTaskOMP);
+  auto perfAnalyzer = std::make_shared<ppc::core::Perf>(kulikovTaskSequential);
   perfAnalyzer->task_run(perfAttr, perfResults);
   ppc::core::Perf::print_perf_statistic(perfResults);
   ASSERT_NEAR((double)63000, out[0], out[1]);

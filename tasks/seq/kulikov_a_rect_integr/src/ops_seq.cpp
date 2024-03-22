@@ -1,7 +1,6 @@
 // Copyright 2023 Kulikov Artem
 #include "seq/kulikov_a_rect_integr/include/ops_seq.hpp"
 
-#include <thread>
 #include <cmath>
 #include <iostream>
 
@@ -28,11 +27,11 @@ bool KulikovTaskSequential::run() {
     h_x = (x_lim_u - x_lim_l) / n, h_y = (y_lim_u - y_lim_l) / n;
     for (uint64_t i = 0; i < n; i++) {
       for (uint64_t j = 0; j < n; j++) {
-        res += f(x_lim_l + h_x * (i + 1 / 2), y_lim_l + h_y * (j + 1 / 2));
+        res += f(x_lim_l + h_x * (i + 0.5), y_lim_l + h_y * (j + 0.5));
       }
     }
     res *= h_x * h_y;
-    err = 2 * (x_lim_u - x_lim_l) * (y_lim_u - y_lim_l) / 24;
+    err = 2 * (x_lim_u - x_lim_l) * (y_lim_u - y_lim_l) * (h_x * h_x + h_y * h_y) / 24;
   } catch (const std::exception& e) {
     std::cout << e.what() << std::endl;
     return false;

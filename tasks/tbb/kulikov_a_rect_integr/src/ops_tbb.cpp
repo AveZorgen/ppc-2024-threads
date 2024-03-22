@@ -1,14 +1,10 @@
 // Copyright 2023 Kulikov Artem
 #include "tbb/kulikov_a_rect_integr/include/ops_tbb.hpp"
 
-// #include <tbb/parallel_for.h>
-// #include <tbb/tbb.h>
 #include <oneapi/tbb.h>
-#include <oneapi/tbb/parallel_for.h>
 
 #include <cmath>
 #include <iostream>
-#include <thread>
 
 using namespace std::chrono_literals;
 
@@ -37,14 +33,14 @@ bool KulikovTaskTBB::run() {
           size_t end = r.end();
           for (size_t i = r.begin(); i != end; ++i) {
             for (size_t j = 0; j < n; ++j) {
-              sum += my_f(x_lim_l + h_x * (i + 1 / 2), y_lim_l + h_y * (j + 1 / 2));
+              sum += my_f(x_lim_l + h_x * (i + 0.5), y_lim_l + h_y * (j + 0.5));
             }
           }
           return sum;
         },
         std::plus<double>());
     res = sum * h_x * h_y;
-    err = 2 * (x_lim_u - x_lim_l) * (y_lim_u - y_lim_l) / 24;
+    err = 2 * (x_lim_u - x_lim_l) * (y_lim_u - y_lim_l) * (h_x * h_x + h_y * h_y) / 24;
   } catch (const std::exception& e) {
     std::cout << e.what() << std::endl;
     return false;

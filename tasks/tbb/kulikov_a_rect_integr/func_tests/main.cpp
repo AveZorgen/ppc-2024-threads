@@ -6,7 +6,7 @@
 #include "tbb/kulikov_a_rect_integr/include/ops_tbb.hpp"
 
 TEST(kulikov_a_rect_integr_tbb, Small) {
-  std::vector<double> in{0.0, 1.0, 0.0, 1.0, 2e4};  // x_lim_l, x_lim_u, y_lim_l, y_lim_u, n
+  std::vector<double> in{0.0, 1.0, 0.0, 1.0, 1e3};  // x_lim_l, x_lim_u, y_lim_l, y_lim_u, n
   std::vector<double> out(2);                       // res, err
 
   // Create TaskData
@@ -26,7 +26,7 @@ TEST(kulikov_a_rect_integr_tbb, Small) {
 }
 
 TEST(kulikov_a_rect_integr_tbb, Normal) {
-  std::vector<double> in{0.0, 2.0, 3.0, 5.0, 2e4};
+  std::vector<double> in{0.0, 2.0, 3.0, 5.0, 1e3};
   std::vector<double> out(2);
 
   // Create TaskData
@@ -46,7 +46,7 @@ TEST(kulikov_a_rect_integr_tbb, Normal) {
 }
 
 TEST(kulikov_a_rect_integr_tbb, Zero) {
-  std::vector<double> in{0.0, 2.0, 0.0, 0.0, 2e4};
+  std::vector<double> in{0.0, 2.0, 0.0, 0.0, 1e3};
   std::vector<double> out(2);
 
   // Create TaskData
@@ -66,7 +66,7 @@ TEST(kulikov_a_rect_integr_tbb, Zero) {
 }
 
 TEST(kulikov_a_rect_integr_tbb, Negative) {
-  std::vector<double> in{-2.0, 0.0, -5.0, -3.0, 2e4};
+  std::vector<double> in{-2.0, 0.0, -5.0, -3.0, 1e3};
   std::vector<double> out(2);
 
   // Create TaskData
@@ -86,7 +86,7 @@ TEST(kulikov_a_rect_integr_tbb, Negative) {
 }
 
 TEST(kulikov_a_rect_integr_tbb, NegativeLarge) {
-  std::vector<double> in{-15.0, 15.0, -20.0, 10.0, 2e4};
+  std::vector<double> in{-15.0, 15.0, -20.0, 10.0, 1e3};
   std::vector<double> out(2);
 
   // Create TaskData

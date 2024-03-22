@@ -6,8 +6,6 @@
 #include <cmath>
 #include <iostream>
 
-using namespace std::chrono_literals;
-
 auto f = [](double x, double y) { return std::pow(x, 2) + y; };
 
 bool KulikovTaskOMP::validation() {
@@ -33,12 +31,12 @@ bool KulikovTaskOMP::run() {
       double pre_res = .0;
 #pragma omp parallel for reduction(+ : pre_res)
       for (int64_t j = 0; j < n; j++) {
-        pre_res += f(x_lim_l + h_x * (i + 1 / 2), y_lim_l + h_y * (j + 1 / 2));
+        pre_res += f(x_lim_l + h_x * (i + 0.5), y_lim_l + h_y * (j + 0.5));
       }
       res_ += pre_res;
     }
     res = res_ * h_x * h_y;
-    err = 2 * (x_lim_u - x_lim_l) * (y_lim_u - y_lim_l) / 24;
+    err = 2 * (x_lim_u - x_lim_l) * (y_lim_u - y_lim_l) * (h_x * h_x + h_y * h_y) / 24;
   } catch (const std::exception& e) {
     std::cout << e.what() << std::endl;
     return false;

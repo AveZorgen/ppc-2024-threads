@@ -15,7 +15,7 @@ bool KulikovTaskOMP::validation() {
 
 bool KulikovTaskOMP::pre_processing() {
   internal_order_test();
-  double* inp = reinterpret_cast<double*>(taskData->inputs[0]);
+  auto* inp = reinterpret_cast<double*>(taskData->inputs[0]);
   x_lim_l = inp[0], x_lim_u = inp[1], y_lim_l = inp[2], y_lim_u = inp[3], n = inp[4];
   res = 0, err = 0;
   return true;

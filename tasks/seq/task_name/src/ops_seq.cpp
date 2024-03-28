@@ -1,8 +1,10 @@
 // Copyright 2024 Nesterov Alexander
 #include "seq/task_name/include/ops_seq.hpp"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 #include <algorithm>
-#include <cmath>
 #include <iostream>
 #include <iterator>
 #include <random>
@@ -13,7 +15,7 @@ void jarvis::prepare_points(std::vector<jarvis::r>& points, jarvis::r* hull, int
   std::mt19937 g(seed);
   std::uniform_real_distribution gen(-r, r);
   int i = 0, n = points.size();
-  double phi = 2 * std::_Pi / h;
+  double phi = 2 * M_PI / h;
   for (; i < h; i++) {
     hull[i] = points[i] = {cos(phi * i) * 2 * r, sin(phi * i) * 2 * r};
   }

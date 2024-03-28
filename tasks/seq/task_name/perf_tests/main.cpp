@@ -9,12 +9,12 @@
 #include "seq/task_name/include/ops_seq.hpp"
 
 TEST(sequential_task_name_perf_test, test_pipeline_run) {
-  int n = 10000, h = 600;
+  int n = 20000, h = 600;
   std::vector<jarvis::r> points(n);
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
 
-  jarvis::prepare_points(points, hull.data(), hull.size(), 90.0);
+  jarvis::prepare_points(points, hull.data(), hull.size(), 250.0);
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataSeq = std::make_shared<ppc::core::TaskData>();
@@ -47,12 +47,12 @@ TEST(sequential_task_name_perf_test, test_pipeline_run) {
 }
 
 TEST(sequential_task_name_perf_test, test_task_run) {
-  int n = 10000, h = 600;
+  int n = 20000, h = 600;
   std::vector<jarvis::r> points(n);
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
 
-  jarvis::prepare_points(points, hull.data(), hull.size(), 90.0);
+  jarvis::prepare_points(points, hull.data(), hull.size(), 250.0);
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataSeq = std::make_shared<ppc::core::TaskData>();

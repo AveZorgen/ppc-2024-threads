@@ -1,7 +1,9 @@
 // Copyright 2023 Nesterov Alexander
 #pragma once
 
+#include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "core/task/include/task.hpp"
@@ -15,7 +17,7 @@ struct r {
   bool inline operator<(const r& other) const { return x < other.x || (x == other.x && y < other.y); }
   bool inline operator==(const r& other) const { return x == other.x && y == other.y; }
 };
-void prepare_points(std::vector<r>& points, r* hull, int h, double r = 1.0, unsigned int seed = 42u);
+void prepare_points(r* points, int n, r* hull, int h, double r = 1.0, unsigned int seed = 42u);
 }  // namespace jarvis
 
 class TaskNameOpenMP : public ppc::core::Task {
@@ -28,6 +30,6 @@ class TaskNameOpenMP : public ppc::core::Task {
 
  private:
   std::vector<jarvis::r> points{};
-  jarvis::r* hull;
-  int hull_sz;
+  jarvis::r* hull{};
+  int hull_sz{};
 };

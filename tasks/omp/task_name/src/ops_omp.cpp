@@ -12,10 +12,10 @@
 #include <utility>
 #include <vector>
 
-void jarvis::prepare_points(std::vector<jarvis::r>& points, jarvis::r* hull, int h, double r, unsigned int seed) {
+void jarvis::prepare_points(jarvis::r* points, int n, jarvis::r* hull, int h, double r, unsigned int seed) {
   std::mt19937 g(seed);
   std::uniform_real_distribution gen(-r, r);
-  int i = 0, n = points.size();
+  int i = 0;
   double phi = 2 * M_PI / h;
   for (; i < h; i++) {
     hull[i] = points[i] = {cos(phi * i) * 2 * r, sin(phi * i) * 2 * r};
@@ -23,7 +23,7 @@ void jarvis::prepare_points(std::vector<jarvis::r>& points, jarvis::r* hull, int
   for (; i < n; i++) {
     points[i] = {gen(g), gen(g)};
   }
-  std::shuffle(points.begin(), points.end(), g);
+  std::shuffle(points, points + n, g);
 }
 
 bool TaskNameOpenMP::pre_processing() {

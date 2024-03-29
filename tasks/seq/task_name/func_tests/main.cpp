@@ -39,7 +39,7 @@ TEST(task_name_seq, Test_Sum_20) {
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
 
-  jarvis::prepare_points(points, hull.data(), hull.size());
+  jarvis::prepare_points(points.data(), points.size(), hull.data(), hull.size());
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataSeq = std::make_shared<ppc::core::TaskData>();
@@ -69,7 +69,7 @@ TEST(task_name_seq, Test_Sum_50) {
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
 
-  jarvis::prepare_points(points, hull.data(), hull.size());
+  jarvis::prepare_points(points.data(), points.size(), hull.data(), hull.size());
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataSeq = std::make_shared<ppc::core::TaskData>();
@@ -99,7 +99,7 @@ TEST(task_name_seq, Test_Sum_70) {
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
 
-  jarvis::prepare_points(points, hull.data(), hull.size(), 9.0);
+  jarvis::prepare_points(points.data(), points.size(), hull.data(), hull.size(), 9.0);
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataSeq = std::make_shared<ppc::core::TaskData>();
@@ -129,7 +129,7 @@ TEST(task_name_seq, Test_Sum_100) {
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
 
-  jarvis::prepare_points(points, hull.data(), hull.size(), 45.0);
+  jarvis::prepare_points(points.data(), points.size(), hull.data(), hull.size(), 45.0);
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataSeq = std::make_shared<ppc::core::TaskData>();

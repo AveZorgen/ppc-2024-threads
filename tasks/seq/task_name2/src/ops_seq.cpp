@@ -12,6 +12,7 @@
 #include <sstream>
 #include <utility>
 #include <vector>
+#include <cstring>
 
 MatrixCRS::MatrixCRS(int n, int nz) : N(n), NZ(nz) {
   Value.reserve(nz);

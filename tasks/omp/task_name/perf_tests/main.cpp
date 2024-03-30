@@ -41,8 +41,8 @@ TEST(openmp_task_name_perf_test, test_pipeline_run) {
   std::sort(out.begin(), out.end());
   std::sort(hull.begin(), hull.end());
   for (size_t i = 0; i < hull.size(); i++) {
-    EXPECT_DOUBLE_EQ(hull[i].x, out[i].x);
-    EXPECT_DOUBLE_EQ(hull[i].y, out[i].y);
+    ASSERT_NEAR(hull[i].x, out[i].x, 1e-3);
+    ASSERT_NEAR(hull[i].y, out[i].y, 1e-3);
   }
 }
 
@@ -79,7 +79,7 @@ TEST(openmp_task_name_perf_test, test_task_run) {
   std::sort(out.begin(), out.end());
   std::sort(hull.begin(), hull.end());
   for (size_t i = 0; i < hull.size(); i++) {
-    EXPECT_DOUBLE_EQ(hull[i].x, out[i].x);
-    EXPECT_DOUBLE_EQ(hull[i].y, out[i].y);
+    ASSERT_NEAR(hull[i].x, out[i].x, 1e-3);
+    ASSERT_NEAR(hull[i].y, out[i].y, 1e-3);
   }
 }

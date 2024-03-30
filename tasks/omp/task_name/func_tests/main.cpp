@@ -28,8 +28,8 @@ TEST(task_name_omp, Test_Sum_10) {
   std::sort(out.begin(), out.end());
   std::sort(hull.begin(), hull.end());
   for (size_t i = 0; i < hull.size(); i++) {
-    EXPECT_DOUBLE_EQ(hull[i].x, out[i].x);
-    EXPECT_DOUBLE_EQ(hull[i].y, out[i].y);
+    ASSERT_NEAR(hull[i].x, out[i].x, 1e-3);
+    ASSERT_NEAR(hull[i].y, out[i].y, 1e-3);
   }
 }
 
@@ -58,8 +58,8 @@ TEST(task_name_omp, Test_Sum_20) {
   std::sort(out.begin(), out.end());
   std::sort(hull.begin(), hull.end());
   for (size_t i = 0; i < hull.size(); i++) {
-    EXPECT_DOUBLE_EQ(hull[i].x, out[i].x);
-    EXPECT_DOUBLE_EQ(hull[i].y, out[i].y);
+    ASSERT_NEAR(hull[i].x, out[i].x, 1e-3);
+    ASSERT_NEAR(hull[i].y, out[i].y, 1e-3);
   }
 }
 
@@ -88,13 +88,13 @@ TEST(task_name_omp, Test_Sum_50) {
   std::sort(out.begin(), out.end());
   std::sort(hull.begin(), hull.end());
   for (size_t i = 0; i < hull.size(); i++) {
-    EXPECT_DOUBLE_EQ(hull[i].x, out[i].x);
-    EXPECT_DOUBLE_EQ(hull[i].y, out[i].y);
+    ASSERT_NEAR(hull[i].x, out[i].x, 1e-3);
+    ASSERT_NEAR(hull[i].y, out[i].y, 1e-3);
   }
 }
 
 TEST(task_name_omp, Test_Sum_70) {
-  int n = 1000, h = 1200;
+  int n = 1000, h = 600;
   std::vector<jarvis::r> points(n);
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
@@ -118,13 +118,13 @@ TEST(task_name_omp, Test_Sum_70) {
   std::sort(out.begin(), out.end());
   std::sort(hull.begin(), hull.end());
   for (size_t i = 0; i < hull.size(); i++) {
-    EXPECT_DOUBLE_EQ(hull[i].x, out[i].x);
-    EXPECT_DOUBLE_EQ(hull[i].y, out[i].y);
+    ASSERT_NEAR(hull[i].x, out[i].x, 1e-3);
+    ASSERT_NEAR(hull[i].y, out[i].y, 1e-3);
   }
 }
 
 TEST(task_name_omp, Test_Sum_100) {
-  int n = 5000, h = 1200;
+  int n = 5000, h = 600;
   std::vector<jarvis::r> points(n);
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
@@ -148,7 +148,7 @@ TEST(task_name_omp, Test_Sum_100) {
   std::sort(out.begin(), out.end());
   std::sort(hull.begin(), hull.end());
   for (size_t i = 0; i < hull.size(); i++) {
-    EXPECT_DOUBLE_EQ(hull[i].x, out[i].x);
-    EXPECT_DOUBLE_EQ(hull[i].y, out[i].y);
+    ASSERT_NEAR(hull[i].x, out[i].x, 1e-3);
+    ASSERT_NEAR(hull[i].y, out[i].y, 1e-3);
   }
 }

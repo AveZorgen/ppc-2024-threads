@@ -16,13 +16,13 @@ void jarvis::prepare_points(jarvis::r* points, int n, jarvis::r* hull, int h, do
   std::uniform_real_distribution gen(-r, r);
   int i = 0;
   double phi = 2 * M_PI / h;
-  for (; i < h; i++) {
-    hull[i] = points[i] = {cos(phi * i) * 2 * r, sin(phi * i) * 2 * r};
-  }
-  for (; i < n; i++) {
+  for (i = 0; i < n; i++) {
     points[i] = {gen(g), gen(g)};
   }
-  std::shuffle(points, points + n, g);
+  int k = n / (h + 1);
+  for (i = 0; i < h; i++) {
+    hull[i] = points[k * (i + 1)] = {cos(phi * i) * 2 * r, sin(phi * i) * 2 * r};
+  }
 }
 
 bool TaskNameSequential::pre_processing() {

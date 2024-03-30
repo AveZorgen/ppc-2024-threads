@@ -8,7 +8,7 @@
 #include "seq/task_name/include/ops_seq.hpp"
 
 TEST(sequential_task_name_perf_test, test_pipeline_run) {
-  int n = 20000, h = 600;
+  int n = 20000, h = 1200;
   std::vector<jarvis::r> points(n);
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
@@ -51,7 +51,7 @@ TEST(sequential_task_name_perf_test, test_pipeline_run) {
 }
 
 TEST(sequential_task_name_perf_test, test_task_run) {
-  int n = 20000, h = 600;
+  int n = 20000, h = 1200;
   std::vector<jarvis::r> points(n);
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());

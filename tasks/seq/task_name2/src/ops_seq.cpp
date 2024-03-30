@@ -46,62 +46,6 @@ MatrixCRS::MatrixCRS(const double* matrix, int n, int m, bool transpose) {
   // std::cout << RowIndex.size() << std::endl;
 }
 
-MatrixCRS Multiplicate(const MatrixCRS& A, const MatrixCRS& BT) {
-  int N = A.N;  //! A.n == BT.N
-  std::vector<int> columns;
-  std::vector<double> values;
-  std::vector<int> row_index;
-  int rowNZ;
-  int nz_expected = A.NZ * BT.NZ / N + 1;
-  std::cout << "NZ = " << nz_expected << std::endl;
-  values.reserve(nz_expected);
-  columns.reserve(nz_expected);
-  row_index.push_back(0);
-  for (int i = 0; i < N; i++) {
-    rowNZ = 0;
-    for (int j = 0; j < N; j++) {
-      double sum = 0;
-
-      // int ks = A.RowIndex[i];
-      // int ls = BT.RowIndex[j];
-      // int kf = A.RowIndex[i + 1] - 1;
-      // int lf = BT.RowIndex[j + 1] - 1;
-      // while (ks <= kf && ls <= lf) {
-      //   if (A.Col[ks] < BT.Col[ls])
-      //     ks++;
-      //   else if (A.Col[ks] > BT.Col[ls])
-      //     ls++;
-      //   else {
-      //     sum += A.Value[ks] * BT.Value[ls];
-      //     ks++;
-      //     ls++;
-      //   }
-      // }
-
-      for (int k = A.RowIndex[i]; k < A.RowIndex[i + 1]; k++)
-        for (int l = BT.RowIndex[j]; l < BT.RowIndex[j + 1]; l++)
-          if (A.Col[k] == BT.Col[l]) {
-            sum += A.Value[k] * BT.Value[l];
-            break;
-          }
-
-      if (fabs(sum) > EPS) {
-        columns.push_back(j);
-        values.push_back(sum);
-        rowNZ++;
-      }
-    }
-    row_index.push_back(rowNZ + row_index[i]);
-  }
-  MatrixCRS C(N, columns.size());
-  for (int j = 0; j < columns.size(); j++) {
-    C.Col[j] = columns[j];
-    C.Value[j] = values[j];
-  }
-  for (int i = 0; i <= N; i++) C.RowIndex[i] = row_index[i];
-  return C;
-}
-
 MatrixCRS Multiplicate2(const MatrixCRS& A, const MatrixCRS& BT, int m) {
   int N = A.N;  //! A.n == BT.N
   int nz_expected = A.NZ * BT.NZ / N + 1;

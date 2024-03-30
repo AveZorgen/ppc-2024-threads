@@ -6,6 +6,7 @@
 #include <omp.h>
 
 #include <algorithm>
+#include <cstring>
 #include <iomanip>
 #include <iostream>
 #include <iterator>
@@ -13,7 +14,6 @@
 #include <sstream>
 #include <utility>
 #include <vector>
-#include <cstring>
 
 MatrixCRS::MatrixCRS(int n, int nz) : N(n), NZ(nz) {
   Value.reserve(nz);
@@ -96,14 +96,17 @@ MatrixCRS ParMultiplicate2(const MatrixCRS& A, const MatrixCRS& BT, int m) {
   int count = 0;
   for (i = 0; i < N; i++) {
     int size = columns[i].size();
-    // memmove(C.Col.data() + count, columns[i].data(), size * sizeof(*columns[i].data()));
-    // memmove(C.Value.data() + count, values[i].data(), size * sizeof(*values[i].data()));
-    std::move(columns[i].begin(), columns[i].end(), C.Col.data() + count);
-    std::move(values[i].begin(), values[i].end(), C.Value.data() + count);
+    memmove(C.Col.data() + count, columns[i].data(), size * sizeof(*columns[i].data()));
+    memmove(C.Value.data() + count, values[i].data(), size * sizeof(*values[i].data()));
+    // std::move(columns[i].begin(), columns[i].end(), C.Col.data() + count);
+    // std::move(values[i].begin(), values[i].end(), C.Value.data() + count);
     count += size;
   }
-  // memmove(C.RowIndex.data(), row_index, (N + 1) * sizeof(*row_index));
-  std::move(row_index, row_index + N + 1, C.RowIndex.data());
+  memmove(C.RowIndex.data(), row_index, (N + 1) * sizeof(*row_index));
+  // std::move(row_index, row_index + N + 1, C.RowIndex.data());
+  delete[] row_index;
+  delete[] columns;
+  delete[] values;
   return C;
 }
 

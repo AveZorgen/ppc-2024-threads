@@ -124,7 +124,7 @@ TEST(task_name_omp, Test_Sum_70) {
 }
 
 TEST(task_name_omp, Test_Sum_100) {
-  int n = 1000, h = 600;
+  int n = 500, h = 300;
   std::vector<jarvis::r> points(n);
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());

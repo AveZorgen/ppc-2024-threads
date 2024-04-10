@@ -1,8 +1,8 @@
 // Copyright 2024 Nesterov Alexander
 #include "seq/task_name4/include/ops_seq.hpp"
 
+#include <algorithm>
 #include <iostream>
-#include <map>
 #include <random>
 #include <stack>
 #include <utility>

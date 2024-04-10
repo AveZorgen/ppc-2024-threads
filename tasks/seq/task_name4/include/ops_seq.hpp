@@ -13,6 +13,7 @@ struct pnt {
   int x{};
   int y{};
   pnt() : x(0), y(0) {}
+  pnt(int x_, int y_) : x(x_), y(y_) {}
 };
 
 const int SEPARATOR = -1;

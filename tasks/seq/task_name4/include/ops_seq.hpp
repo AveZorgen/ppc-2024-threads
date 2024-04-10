@@ -12,6 +12,7 @@ namespace task4 {
 struct pnt {
   int x{};
   int y{};
+  pnt() : x(0), y(0) {}
 };
 
 const int SEPARATOR = -1;

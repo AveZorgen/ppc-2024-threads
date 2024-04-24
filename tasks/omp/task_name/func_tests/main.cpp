@@ -129,7 +129,7 @@ TEST(task_name_omp, Test_Sum_100) {
   std::vector<jarvis::r> hull(h);
   std::vector<jarvis::r> out(hull.size());
 
-  jarvis::prepare_points(points.data(), points.size(), hull.data(), hull.size(), 45.0);
+  jarvis::prepare_points(points.data(), points.size(), hull.data(), hull.size(), 9.0);
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataSeq = std::make_shared<ppc::core::TaskData>();

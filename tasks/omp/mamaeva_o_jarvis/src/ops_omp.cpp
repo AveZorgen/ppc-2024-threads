@@ -13,7 +13,7 @@
 
 using namespace mamaeva_omp;
 
-void prepare_points(r* points, int n, r* hull, int h, double r, unsigned int seed) {
+void mamaeva_omp::prepare_points(r* points, int n, r* hull, int h, double r, unsigned int seed) {
   std::mt19937 g(seed);
   std::uniform_real_distribution gen(-r, r);
   int i = 0;

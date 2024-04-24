@@ -17,7 +17,7 @@ TEST(mamaeva_o_jarvis_omp, test_pipeline_run) {
   std::vector<r> hull(h);
   std::vector<r> out(hull.size());
 
-  prepare_points(points.data(), points.size(), hull.data(), hull.size(), 250.0);
+  mamaeva_omp::prepare_points(points.data(), points.size(), hull.data(), hull.size(), 250.0);
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskData = std::make_shared<ppc::core::TaskData>();
@@ -56,7 +56,7 @@ TEST(mamaeva_o_jarvis_omp, test_task_run) {
   std::vector<r> hull(h);
   std::vector<r> out(hull.size());
 
-  prepare_points(points.data(), points.size(), hull.data(), hull.size(), 250.0);
+  mamaeva_omp::prepare_points(points.data(), points.size(), hull.data(), hull.size(), 250.0);
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskData = std::make_shared<ppc::core::TaskData>();

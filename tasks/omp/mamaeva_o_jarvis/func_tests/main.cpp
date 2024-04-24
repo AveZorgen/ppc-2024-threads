@@ -123,7 +123,7 @@ TEST(mamaeva_o_jarvis_omp, testrnd_hull_d) {
   std::vector<r> hull(h);
   std::vector<r> out(hull.size());
 
-  prepare_points(points.data(), points.size(), hull.data(), hull.size());
+  mamaeva_omp::prepare_points(points.data(), points.size(), hull.data(), hull.size());
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskData = std::make_shared<ppc::core::TaskData>();

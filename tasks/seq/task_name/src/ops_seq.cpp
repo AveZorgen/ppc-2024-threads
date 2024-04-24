@@ -1,8 +1,7 @@
 // Copyright 2024 Nesterov Alexander
 #include "seq/task_name/include/ops_seq.hpp"
 
-#define _USE_MATH_DEFINES
-#include <math.h>
+#define M_PI 3.14159265358979323846
 
 #include <algorithm>
 #include <iostream>
